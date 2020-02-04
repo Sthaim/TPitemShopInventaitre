@@ -12,21 +12,27 @@ typedef struct Objet objet;
 
 void triTableau(objet *tableau, int * index){
   objet trade;
-  for (int i=0; i<*index-1;i++){
-    if ((strcmp (tableau[i+1].nom, tableau[i].nom))<0){
-      trade=tableau[i+1];
-      tableau[i+1]=tableau[i];
-      tableau[i]=trade;
-    }
-  }
+	int counter;
+	while (counter!=*index){
+		counter=1;
+	  for (int i=0; i<*index-1;i++){
+	    if (strcmp (tableau[i].nom, tableau[i+1].nom)>0){
+	      trade=tableau[i];
+	      tableau[i]=tableau[i+1];
+	      tableau[i+1]=trade;
+				printf("tri entre : %d et %d\n",i,i+1);
+	    }
+			else{
+				counter++;
+			}
+	  }
+	}
 }
 
 void ajoutTableau(objet * thing, int * index, objet *tableau){
-  printf("Prix: %d \n",(*thing).prix);
   tableau[*index]=*thing;
-
   *index=*index+1;
-  triTableau(tableau,index);
+	triTableau(tableau,index);
 }
 
 
@@ -45,9 +51,8 @@ int main(){
   ajoutTableau(&yoyo,&index,inventaire);
   objet orange={"orange",20};
   ajoutTableau(&orange,&index,inventaire);
-  afficherTableau(inventaire,index);
-  printf("Index: %d \n",index);
-  printf("Nom: %s  Prix: %d\n",inventaire[index].nom,inventaire[index].prix);
-  printf("Nom: %d\n",strcmp(inventaire[index-1].nom,inventaire[index].nom));
+	for(int i=0;i<3;i++){
+		
+	}
 	return 0;
 }
